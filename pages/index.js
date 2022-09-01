@@ -54,7 +54,9 @@ export default function Home({ propertiesForSale, propertiesForRent }) {
         imageUrl="https://cdn-cms.pgimgs.com/static/2017/06/Handshake-over-Property-Deal.jpg"
       />
       <Flex flexWrap="wrap">
-        {/* Fetch the properties and map over them... */}
+        {propertiesForRent.map((property) => (
+          <Property property={property} key={property.id} />
+        ))}
       </Flex>
       <Banner
         purpose="BUY A HOME"
