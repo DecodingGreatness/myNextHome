@@ -2,6 +2,8 @@ import Link from "next/link";
 import Image from "next/image";
 import { Flex, Box, Text, Button } from "@chakra-ui/react";
 
+import { baseUrl, fetchApi } from "../utils/fetchApi";
+
 export const Banner = ({
   purpose,
   title1,
@@ -28,7 +30,7 @@ export const Banner = ({
         <br />
         {desc2}
       </Text>
-      <Button fontSize="xl" bg="blue.300" color="white">
+      <Button fontSize="xl">
         <Link href={linkName}>
           <a>{buttonText}</a>
         </Link>
@@ -37,10 +39,10 @@ export const Banner = ({
   </Flex>
 );
 
-export default function Home() {
+export default function Home({ propertiesForSale, propertiesForRent }) {
+  console.log(propertiesForSale, propertiesForRent);
   return (
-    <div>
-      <h1> Hello World</h1>
+    <Box>
       <Banner
         purpose="RENT A HOME"
         title1="Rental Homes for"
@@ -51,6 +53,9 @@ export default function Home() {
         linkName="/search?purpose=for-rent"
         imageUrl="https://cdn-cms.pgimgs.com/static/2017/06/Handshake-over-Property-Deal.jpg"
       />
+      <Flex flexWrap="wrap">
+        {/* Fetch the properties and map over them... */}
+      </Flex>
       <Banner
         purpose="BUY A HOME"
         title1="Find, Buy & Own Your"
@@ -61,6 +66,25 @@ export default function Home() {
         linkName="/search?purpose=for-rent"
         imageUrl="https://cdn-cms.pgimgs.com/static/2017/06/Handshake-over-Property-Deal.jpg"
       />
-    </div>
+      <Flex flexWrap="wrap">
+        {/* Fetch the properties and map over them... */}
+      </Flex>
+    </Box>
   );
+}
+
+export async function getStaticProps() {
+  const propertyForSale = await fetchApi(
+    `${baseUrl}/properties/list?locationExternalIDs=5002&purpose=for-sale&hitsPerPage=6`
+  );
+  const propertyForRent = await fetchApi(
+    `${baseUrl}/properties/list?locationExternalIDs=5002&purpose=for-rent&hitsPerPage=6`
+  );
+
+  return {
+    props: {
+      propertiesForSale: propertyForSale?.hits,
+      propertiesForRent: propertyForRent?.hits,
+    },
+  };
 }
