@@ -3,7 +3,7 @@ import Image from "next/image";
 import { Box, Flex, Text, Avatar } from "@chakra-ui/react";
 import { FaBed, FaBath } from "react-icons/fa";
 import { BsGridFill } from "react-icons/bs";
-import { Goverified } from "react-icons/goverified";
+import { Goverified } from "react-icons/go";
 import millify from "millify";
 
 const Property = ({
@@ -17,10 +17,10 @@ const Property = ({
     area,
     agency,
     isVerified,
-    externalID,
+    externalId,
   },
 }) => (
-  <Link href={`/property/${externalID}`} passHref>
+  <Link href={`/property/${externalId}`} passHref>
     {title}
   </Link>
 );
