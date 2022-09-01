@@ -40,7 +40,7 @@ export const Banner = ({
   </Flex>
 );
 
-export default function Home({ propertiesForSale, propertiesForRent }) {
+const Home = ({ propertiesForSale, propertiesForRent }) => {
   return (
     <Box>
       <Banner
@@ -75,7 +75,7 @@ export default function Home({ propertiesForSale, propertiesForRent }) {
       </Flex>
     </Box>
   );
-}
+};
 
 export async function getStaticProps() {
   const propertyForSale = await fetchApi(
@@ -92,3 +92,5 @@ export async function getStaticProps() {
     },
   };
 }
+
+export default Home;
