@@ -29,7 +29,7 @@ const Search = ({ properties }) => {
         <Icon paddingLeft="2" w="7" as={BsFilter} />
       </Flex>
       {searchFilters && <SearchFilters />}
-      <Text fontSize="2x1" p="4" foontWeight="bold">
+      <Text fontSize="2x1" p="4" fontWeight="bold">
         Properties {router.query.purpose}
       </Text>
       <Flex flexWrap="wrap">
@@ -55,8 +55,6 @@ const Search = ({ properties }) => {
   );
 };
 
-export default Search;
-
 export async function getServerSideProps({ query }) {
   const purpose = query.purpose || "for-rent";
   const rentFrequency = query.rentFrequency || "yearly";
@@ -79,3 +77,5 @@ export async function getServerSideProps({ query }) {
     },
   };
 }
+
+export default Search;
